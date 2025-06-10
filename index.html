@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>ରଜ ଶୁଭେଚ୍ଛା | Rajo Wish Viral</title>
+  <style>
+    html, body { height: 100%; margin:0; padding:0; }
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(135deg, #ffe9b3 0%, #ffb347 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      max-width:350px;
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 2px 8px #e2b007;
+      padding:20px 10px;
+      text-align:center;
+      margin: 20px;
+    }
+    h2 { color:#d72660; }
+    input, button { font-size:1em; padding:7px; border-radius:6px; border:1px solid #fbb034; margin:5px 0; }
+    .wish { margin:15px 0; font-size:1.1em; color:#b03a2e; min-height:32px; }
+    #shareBtn { background: #fbb034; color: #fff; border:none; margin-top:10px; display:none; }
+    .festive-img { width:60px; margin-bottom:10px; }
+    .credit { font-size:0.85em; color:#888; margin-top:15px; }
+    .sender { color:#d72660; font-weight:bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://img.icons8.com/color/96/lotus.png" alt="Rajo Festival" class="festive-img">
+    <h2>ରଜ ପାଇଁ ନାମ ଅନୁସାରେ ଶୁଭେଚ୍ଛା</h2>
+    <div id="senderMsg"></div>
+    <form id="wishForm" onsubmit="wish(event)">
+      <input id="name" type="text" placeholder="ଆପଣଙ୍କ ନାମ ଦିଅନ୍ତୁ" required>
+      <button type="submit">ଶୁଭେଚ୍ଛା ପଠାନ୍ତୁ</button>
+    </form>
+    <div class="wish" id="msg"></div>
+    <button id="shareBtn">🔗 ଅଂଶୀଦାର କରନ୍ତୁ</button>
+    <br>
+    <button onclick="document.getElementById('music').play()">🎵 ଗୀତ ଚଲାନ୍ତୁ</button>
+    <audio id="music" src="rajo-music.mp3" loop></audio>
+    <div class="credit">© 2025 | Viral Rajo Wish | <a href="https://github.com/bhualways" target="_blank">GitHub</a></div>
+  </div>
+  <script>
+    // Get sender from URL if present
+    function getSenderFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('from');
+    }
+    // Show sender's name if present
+    const sender = getSenderFromURL();
+    if(sender) {
+      document.getElementById('senderMsg').innerHTML = `<div style="margin-bottom:8px;">ଏହି ଶୁଭେଚ୍ଛା <span class="sender">${decodeURIComponent(sender)}</span> ଙ୍କ ଠାରୁ!</div>`;
+    }
+
+    function wish(e) {
+      e.preventDefault();
+      let n = document.getElementById('name').value.trim();
+      let m = document.getElementById('msg');
+      let s = document.getElementById('shareBtn');
+      if(n) {
+        m.innerHTML = `ପ୍ରିୟ <b>${n}</b>, ତୁମକୁ ରଜ ଉତ୍ସବର ହାର୍ଦ୍ଦିକ ଶୁଭେଚ୍ଛା! 🌸`;
+        s.style.display = 'inline-block';
+        s.dataset.n = n;
+      } else {
+        m.innerHTML = '';
+        s.style.display = 'none';
+      }
+    }
+    document.getElementById('shareBtn').onclick = function() {
+      let n = this.dataset.n;
+      let baseUrl = location.origin + location.pathname;
+      let viralLink = `${baseUrl}?from=${encodeURIComponent(n)}`;
+      let txt = `ପ୍ରିୟ ମିତ୍ର, ମୁଁ ${n} ତୁମ ପାଇଁ ଏହି ରଜ ଉତ୍ସବର ଶୁଭେଚ୍ଛା ପଠାଉଛି! ତୁମେ ମଧ୍ୟ ନିଜ ନାମରେ ଶୁଭେଚ୍ଛା ପଠାନ୍ତୁ: ${viralLink}`;
+      if(navigator.share) {
+        navigator.share({title:'ରଜ ଶୁଭେଚ୍ଛା', text:txt, url:viralLink});
+      } else {
+        prompt('Share this link:', viralLink);
+      }
+    };
+  </script>
+</body>
+</html>
