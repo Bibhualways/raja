@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ରଜ ପାଇଁ ନାମ ଅନୁସାରେ ଶୁଭେଚ୍ଛା</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans Oriya', sans-serif;
+      background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .container {
+      background: rgba(255,255,255,0.95);
+      margin-top: 40px;
+      padding: 30px 20px 20px 20px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+    h1 {
+      color: #d72660;
+      margin-bottom: 10px;
+      font-size: 2.2em;
+      text-shadow: 1px 1px 8px #fff3cd;
+    }
+    .flower {
+      width: 70px;
+      margin-bottom: 10px;
+    }
+    label, input, button {
+      font-size: 1.1em;
+    }
+    input[type="text"] {
+      padding: 8px 12px;
+      margin: 10px 0;
+      border: 1px solid #d72660;
+      border-radius: 8px;
+      width: 70%;
+      font-family: inherit;
+    }
+    button {
+      background: #d72660;
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #a71d4c;
+    }
+    .wish {
+      margin-top: 18px;
+      font-size: 1.3em;
+      color: #2e2e2e;
+      background: #ffe7c2;
+      padding: 15px 10px;
+      border-radius: 12px;
+      border: 1px solid #ffb347;
+      min-height: 70px;
+      animation: fadeIn 1s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .credit {
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #888;
+    }
+    @media (max-width: 500px) {
+      .container { padding: 15px 5px; }
+      h1 { font-size: 1.4em; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Rajo flower image (replace with your own if you want) -->
+  <img src="https://img.icons8.com/color/96/lotus.png" alt="Rajo Flower" class="flower" />
+  <div class="container">
+    <h1>ରଜ ପାଇଁ ନାମ ଅନୁସାରେ ଶୁଭେଚ୍ଛା</h1>
+    <p>ଆପଣଙ୍କ ନାମ ଦିଅନ୍ତୁ ଏବଂ ନିଜ ନାମରେ ଶୁଭେଚ୍ଛା ନେଇଯାନ୍ତୁ!</p>
+    <form id="wishForm" onsubmit="showWish(event)">
+      <label for="name">ନାମ:</label><br>
+      <input type="text" id="name" name="name" placeholder="ଏଠାରେ ନାମ ଲିଖନ୍ତୁ" required>
+      <br>
+      <button type="submit">ଶୁଭେଚ୍ଛା ଦେଖନ୍ତୁ</button>
+    </form>
+    <div class="wish" id="wishMsg"></div>
+  </div>
+  <div class="credit">
+    © 2025 | ରଜ ଉତ୍ସବ ପାଇଁ ଏହି ୱେବସାଇଟ୍ | <a href="https://github.com/YOUR_GITHUB_USERNAME/rajo-wish-special" target="_blank">GitHub</a>
+  </div>
+  <!-- Background Rajo music (replace src with your music file) -->
+  <audio id="rajoMusic" src="rajo-music.mp3" autoplay loop></audio>
+  <script>
+    function showWish(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const wishMsg = document.getElementById('wishMsg');
+      if(name.length > 0) {
+        wishMsg.innerHTML = `ପ୍ରିୟ <b>${name}</b>, ତୁମକୁ ଏହି ରଜ ଉତ୍ସବର ହାର୍ଦ୍ଦିକ ଶୁଭେଚ୍ଛା! ତୁମ ଜୀବନ ଖୁସି ଓ ଆନନ୍ଦରେ ପୂର୍ଣ୍ଣ ହେଉ। 🌸`;
+      } else {
+        wishMsg.innerHTML = '';
+      }
+    }
+    // Try to auto-play music on load (may need user interaction on some browsers)
+    window.addEventListener('load', function() {
+      const audio = document.getElementById('rajoMusic');
+      audio.volume = 0.5;
+      audio.play().catch(()=>{});
+    });
+  </script>
+</body>
+</html>
