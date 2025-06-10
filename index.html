@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>ରଜ ଶୁଭେଚ୍ଛା | ନିଜ ନାମରେ ପଠାନ୍ତୁ</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@700&display=swap');
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      background: linear-gradient(135deg, #ffe9b3 0%, #ffb347 100%);
+      font-family: 'Noto Sans Oriya', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .pattachitra-top, .pattachitra-bottom {
+      width: 100vw;
+      height: 40px;
+      background: url('https://i.imgur.com/1s1pZ9K.png') repeat-x;
+      background-size: contain;
+      position: absolute;
+      left: 0;
+      z-index: 2;
+    }
+    .pattachitra-top { top: 0; }
+    .pattachitra-bottom { bottom: 0; transform: scaleY(-1);}
+    .main-cover {
+      background: rgba(255,255,255,0.92);
+      border-radius: 24px;
+      box-shadow: 0 8px 36px #e2b00777;
+      padding: 36px 16px 24px 16px;
+      width: 96vw;
+      max-width: 420px;
+      min-height: 70vh;
+      margin: 60px 0 40px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 3;
+    }
+    .festive-flower {
+      width: 72px;
+      margin-bottom: 12px;
+      animation: swing 2.5s infinite ease-in-out;
+      transform-origin: top center;
+      filter: drop-shadow(0 2px 8px #e2b00799);
+    }
+    @keyframes swing {
+      0% { transform: rotate(-8deg);}
+      50% { transform: rotate(8deg);}
+      100% { transform: rotate(-8deg);}
+    }
+    h1 {
+      color: #d72660;
+      font-size: 2em;
+      margin: 0 0 8px 0;
+      font-family: 'Noto Sans Oriya', sans-serif;
+      letter-spacing: 1px;
+    }
+    .sender-info {
+      color: #b03a2e;
+      font-size: 1.1em;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .input-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin: 16px 0 8px 0;
+      width: 100%;
+    }
+    input[type="text"] {
+      font-size: 1.1em;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1.5px solid #fbb034;
+      width: 90%;
+      max-width: 320px;
+      outline: none;
+      font-family: 'Noto Sans Oriya', sans-serif;
+    }
+    input[type="file"] {
+      font-size: 1em;
+      margin-top: 5px;
+      color: #d72660;
+    }
+    button {
+      background: #fbb034;
+      color: #fff;
+      border: none;
+      font-size: 1.15em;
+      padding: 10px 28px;
+      border-radius: 8px;
+      margin-top: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: 'Noto Sans Oriya', sans-serif;
+    }
+    button:hover { background: #d72660; }
+    .wish-message {
+      margin: 18px 0 10px 0;
+      font-size: 1.2em;
+      color: #a04020;
+      min-height: 32px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+    #shareBtn { display: none; }
+    .credit {
+      font-size: 0.9em;
+      color: #888;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .music-controls {
+      margin: 10px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+    }
+    .music-label {
+      color: #b03a2e;
+      font-size: 1em;
+      margin-bottom: 2px;
+    }
+    @media (max-width: 500px) {
+      .main-cover { padding: 16px 2vw 16px 2vw; }
+      h1 { font-size: 1.2em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="pattachitra-top"></div>
+  <div class="main-cover">
+    <img src="https://img.icons8.com/color/96/lotus.png" alt="Rajo Festival" class="festive-flower">
+    <h1>ରଜ ଉତ୍ସବର ଶୁଭେଚ୍ଛା</h1>
+    <div id="senderMsg" class="sender-info"></div>
+    <form id="wishForm" onsubmit="wish(event)">
+      <div class="input-row">
+        <input id="name" type="text" placeholder="ଆପଣଙ୍କ ନାମ ଲେଖନ୍ତୁ" required>
+        <button type="submit">ଶୁଭେଚ୍ଛା ପଠାନ୍ତୁ</button>
+      </div>
+    </form>
+    <div class="wish-message" id="msg"></div>
+    <button id="shareBtn">🔗 ଅଂଶୀଦାର କରନ୍ତୁ</button>
+    <div class="music-controls">
+      <span class="music-label">🎶 ନିଜ ଗୀତ ଅପଲୋଡ୍ କରନ୍ତୁ:</span>
+      <input type="file" id="musicUpload" accept="audio/*">
+      <button onclick="playMusic()">ଗୀତ ଚଲାନ୍ତୁ/ବନ୍ଦ କରନ୍ତୁ</button>
+      <audio id="music" loop></audio>
+    </div>
+    <div class="credit">© 2025 | ଏହି ପୃଷ୍ଠା ନିଜ ନାମରେ ଶୁଭେଚ୍ଛା ପଠାନ୍ତୁ | <a href="https://github.com/bhualways" target="_blank">GitHub</a></div>
+  </div>
+  <div class="pattachitra-bottom"></div>
+  <script>
+    // Odia-only UI
+    const wishText = (name) => `ପ୍ରିୟ <b>${name}</b>, ତୁମକୁ ଏହି ରଜ ଉତ୍ସବର ହାର୍ଦ୍ଦିକ ଶୁଭେଚ୍ଛା! ତୁମ ଜୀବନ ଖୁସି ଓ ଆନନ୍ଦରେ ପୂର୍ଣ୍ଣ ହେଉ। 🌸`;
+
+    // Show sender's name if present in URL
+    function getSenderFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('from');
+    }
+    const sender = getSenderFromURL();
+    if(sender) {
+      document.getElementById('senderMsg').innerHTML = `ଏହି ଶୁଭେଚ୍ଛା <span style="color:#d72660;">${decodeURIComponent(sender)}</span> ଙ୍କ ଠାରୁ!`;
+    }
+
+    // Wish logic
+    function wish(e) {
+      e.preventDefault();
+      let n = document.getElementById('name').value.trim();
+      let m = document.getElementById('msg');
+      let s = document.getElementById('shareBtn');
+      if(n) {
+        m.innerHTML = wishText(n);
+        s.style.display = 'inline-block';
+        s.dataset.n = n;
+      } else {
+        m.innerHTML = '';
+        s.style.display = 'none';
+      }
+    }
+
+    // Share logic (viral)
+    document.getElementById('shareBtn').onclick = function() {
+      let n = this.dataset.n;
+      let baseUrl = location.origin + location.pathname;
+      let viralLink = `${baseUrl}?from=${encodeURIComponent(n)}`;
+      let txt = `ମୁଁ ${n} ତୁମ ପାଇଁ ଏହି ରଜ ଉତ୍ସବର ଶୁଭେଚ୍ଛା ପଠାଉଛି! ତୁମେ ମଧ୍ୟ ନିଜ ନାମରେ ଶୁଭେଚ୍ଛା ପଠାନ୍ତୁ: ${viralLink}`;
+      if(navigator.share) {
+        navigator.share({title:'ରଜ ଶୁଭେଚ୍ଛା', text:txt, url:viralLink});
+      } else {
+        prompt('ଏହି ଲିଙ୍କ କପି କରନ୍ତୁ ଓ ଅଂଶୀଦାର କରନ୍ତୁ:', viralLink);
+      }
+    };
+
+    // Music upload and play
+    let musicFileURL = '';
+    document.getElementById('musicUpload').addEventListener('change', function(e){
+      const file = e.target.files[0];
+      if(file) {
+        musicFileURL = URL.createObjectURL(file);
+        const audio = document.getElementById('music');
+        audio.src = musicFileURL;
+        audio.play();
+      }
+    });
+    function playMusic() {
+      const audio = document.getElementById('music');
+      if(audio.src) {
+        if(audio.paused) audio.play();
+        else audio.pause();
+      }
+    }
+  </script>
+</body>
+</html>
