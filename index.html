@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+  <meta charset="UTF-8">
+  <title>ରଜ ଶୁଭେଚ୍ଛା</title>
+  <style>
+    .container {
+      text-align: center;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>ତୁମ ନାମ ଲେଖି ଶୁଭେଚ୍ଛା ଦେଖନ୍ତୁ</h2>
+    <form onsubmit="showWish(event)">
+      <input type="text" id="name" placeholder="ତୁମ ନାମ ଲେଖନ୍ତୁ" required />
+      <button type="submit">ଦେଖନ୍ତୁ</button>
+    </form>
+    <p id="wishMsg" style="margin-top:20px;"></p>
+    <button id="shareBtn" style="margin-top:15px;display:none;">
+      🔗 ଏହି ଶୁଭେଚ୍ଛା ଅନ୍ୟମାନେ ସହ ଭାଗ କରନ୍ତୁ
+    </button>
+  </div>
+
+  <script>
+    function showWish(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const wishMsg = document.getElementById('wishMsg');
+      const shareBtn = document.getElementById('shareBtn');
+      if(name.length > 0) {
+        wishMsg.innerHTML = `ପ୍ରିୟ <b>${name}</b>, ତୁମକୁ ଏହି ରଜ ଉତ୍ସବର ହାର୍ଦ୍ଦିକ ଶୁଭେଚ୍ଛା! ତୁମ ଜୀବନ ଖୁସି ଓ ଆନନ୍ଦରେ ପୂର୍ଣ୍ଣ ହେଉ। 🌸`;
+        shareBtn.style.display = 'inline-block';
+        shareBtn.dataset.username = name;
+      } else {
+        wishMsg.innerHTML = '';
+        shareBtn.style.display = 'none';
+      }
+    }
+
+    document.getElementById('shareBtn').addEventListener('click', function() {
+      const name = this.dataset.username;
+      const shareText = `ପ୍ରିୟ ${name}, ତୁମକୁ ଏହି ରଜ ଉତ୍ସବର ହାର୍ଦ୍ଦିକ ଶୁଭେଚ୍ଛା! ଆପଣଙ୍କ ନାମରେ ଶୁଭେଚ୍ଛା ଦେଖନ୍ତୁ: ${window.location.href}`;
+      if (navigator.share) {
+        navigator.share({
+          title: 'ରଜ ଶୁଭେଚ୍ଛା',
+          text: shareText,
+          url: window.location.href
+        });
+      } else {
+        alert('Sharing not supported on this device/browser. Copy and share manually.');
+      }
+    });
+  </script>
+</body>
+</html>
