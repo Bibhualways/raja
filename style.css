@@ -1,0 +1,47 @@
+body {
+  font-family: sans-serif;
+  background: #fff2f2;
+  text-align: center;
+  padding: 20px;
+}
+.container {
+  max-width: 500px;
+  margin: auto;
+}
+.card-selector img {
+  width: 100px;
+  margin: 5px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.card-selector img.selected {
+  border-color: #d63384;
+}
+.card-preview {
+  position: relative;
+  margin: 20px 0;
+}
+.card-preview img {
+  width: 100%;
+}
+#greetingText {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  font-size: 24px;
+  color: white;
+  text-shadow: 2px 2px 4px #000;
+}
+input {
+  padding: 10px;
+  margin: 10px 0;
+  width: 80%;
+}
+button {
+  padding: 10px 20px;
+  margin: 10px 5px;
+  background: #d63384;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
